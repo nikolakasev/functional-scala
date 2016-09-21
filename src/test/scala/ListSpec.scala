@@ -19,4 +19,8 @@ class ListSpec extends FlatSpec with Matchers {
     List.drop(0, List()) should be (List())
     List.drop(10, List(1,2,3)) should be (List())
   }
+
+  it should "drop while elements are less than 5" in {
+    List.dropWhile(List(1,2,3,4,5,6,4), (i: Int) => i < 5) should be (List(5,6,4))
+  }
 }

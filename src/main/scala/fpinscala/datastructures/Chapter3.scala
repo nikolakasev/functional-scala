@@ -51,4 +51,22 @@ object List {
       case false => l
     }
   }
+
+  def append[A](a: List[A], b: List[A]): List[A] = {
+    a match {
+      case Nil => b
+      case Cons(h, t) => Cons(h, append(t, b))
+    }
+  }
+
+  def init[A](l: List[A]): List[A] = {
+    @tailrec
+    def _init(l: List[A], acc: List[A]): List[A] = l match {
+      case Nil => acc
+      case Cons(_, Nil) => acc
+      case Cons(h, t) => _init(t, append(acc, List(h)))
+    }
+
+    _init(l, Nil)
+  }
 }

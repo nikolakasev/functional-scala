@@ -27,4 +27,13 @@ class ListSpec extends FlatSpec with Matchers {
   it should "return but the last element" in {
     List.init(List(1,2,3,4)) should be (List(1,2,3))
   }
+
+  it should "fold left and right the same way" in {
+    val product = (x: Int, y: Int) => x * y
+    val sum = (x: Int, y: Int) => x + y
+    val list = List(1,2,3,4,5)
+
+    List.foldLeft(list, 1)(product) should be (List.foldRight(list, 1)(product))
+    List.foldLeft(list, 0)(sum) should be (List.foldRight(list, 0)(sum))
+  }
 }

@@ -11,3 +11,6 @@ List.sum2(list)
 
 List.length(list)
 
+List.foldLeft(list, 0)((x, y) => x + y)
+
+List.foldLeft(list, 1)((x, y) => x * y)

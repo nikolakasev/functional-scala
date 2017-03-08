@@ -28,6 +28,12 @@ object List {
 
   def length[A](as: List[A]): Int = foldRight(as, 0)((_, y) => y + 1)
 
+  def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B =
+    as match {
+      case Nil => z
+      case Cons(head, tail) => f(foldLeft(tail, z)(f), head)
+    }
+
   def apply[A](as: A*): List[A] =
     if(as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))

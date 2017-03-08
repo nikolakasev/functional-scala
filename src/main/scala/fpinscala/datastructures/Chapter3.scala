@@ -9,14 +9,24 @@ case class Cons[+A](head: A, tail: List[A]) extends List[A]
 object List {
   def sum(integers: List[Int]): Int = integers match {
     case Nil => 0
-    case Cons(x,xs) => x + sum(xs)
+    case Cons(x, xs) => x + sum(xs)
   }
 
   def product(ds: List[Double]): Double = ds match {
     case Nil => 1.0
-    case Cons(0.0, _) => 0.0
-    case Cons(x,xs) => x * product(xs)
+    case Cons(x, xs) => x * product(xs)
   }
+
+  def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B =
+    as match {
+      case Nil => z
+      case Cons(head, tail) => f(head, foldRight(tail, z)(f))
+    }
+
+  def sum2(ns: List[Int]) = foldRight(ns, 0)(_ + _)
+  def product2(ns: List[Int]) = foldRight(ns, 1)(_ * _)
+
+  def length[A](as: List[A]): Int = foldRight(as, 0)((_, y) => y + 1)
 
   def apply[A](as: A*): List[A] =
     if(as.isEmpty) Nil

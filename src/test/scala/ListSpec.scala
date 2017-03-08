@@ -21,7 +21,7 @@ class ListSpec extends FlatSpec with Matchers {
   }
 
   it should "drop while elements are less than 5" in {
-    List.dropWhile(List(1,2,3,4,5,6,4), (i: Int) => i < 5) should be (List(5,6,4))
+    List.dropWhile(List(1,2,3,4,5,6,4))(i => i < 5) should be (List(5,6,4))
   }
 
   it should "return but the last element" in {
